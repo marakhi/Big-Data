@@ -1,0 +1,26 @@
+
+sql("CREATE TABLE book(line STRING) PARTITIONED BY (book_name STRING)")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/A-mid-summer-night-dream.txt' INTO TABLE book PARTITION(book_name='A-mid-summer-night-dream.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/Hamlet.txt' INTO TABLE book PARTITION(book_name='Hamlet.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/King-Richard-III.txt' INTO TABLE book PARTITION(book_name='King-Richard-III.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/MacBeth.txt' INTO TABLE book PARTITION(book_name='MacBeth.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/Othello.txt' INTO TABLE book PARTITION(book_name='Othello.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/Romeo-and-Juliet.txt' INTO TABLE book PARTITION(book_name='Romeo-and-Juliet.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/The-Merchant-of-Venice.txt' INTO TABLE book PARTITION(book_name='The-Merchant-of-Venice.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/The-tempest.txt' INTO TABLE book PARTITION(book_name='The-tempest.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/The-tragedy-of-Julius-Casear.txt' INTO TABLE book PARTITION(book_name='The-tragedy-of-Julius-Casear.txt')")
+
+sql("LOAD DATA LOCAL INPATH '/home/administrator/Downloads/books/The-tragedy-of-King-Lear.txt' INTO TABLE book PARTITION(book_name='The-tragedy-of-King-Lear.txt')")
+
+sql("SELECT NGRAMS(SENTENCES(LOWER(line)),3,10) AS trigram FROM book")
+
+SELECT EXPLODE(NGRAMS(SENTENCES(LOWER(line)),3,10)) AS trigram FROM book;
